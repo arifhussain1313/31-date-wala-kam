@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Service</title>
+</head>
+<body>
+    <h1>Selected Service</h1>
+    <div id="selected-service"></div>
+    <h2>Selected Offers</h2>
+    <ul id="selected-offers"></ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve the selected service and selected offers from localStorage
+            const selectedService = localStorage.getItem("selectedService");
+            const selectedOffers = JSON.parse(localStorage.getItem("selectedOffers"));
+
+            console.log("Retrieved selected service:", selectedService);
+            console.log("Retrieved selected offers:", selectedOffers);
+
+            // Check if the selected service exists
+            if (selectedService) {
+                document.getElementById('selected-service').textContent = `Selected Service: ${selectedService}`;
+            } else {
+                document.getElementById('selected-service').textContent = `No service selected`;
+            }
+
+            // Check if the selected offers exist
+            if (selectedOffers && selectedOffers.length > 0) {
+                const selectedOffersList = document.getElementById('selected-offers');
+                selectedOffers.forEach(function(offer) {
+                    const li = document.createElement('li');
+                    li.textContent = `Offer: ${offer}`;
+                    selectedOffersList.appendChild(li);
+                });
+            } else {
+                document.getElementById('selected-offers').textContent = `No offers selected`;
+            }
+        });
+    </script>
+</body>
+</html>
